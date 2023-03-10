@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "dockerlab"
+version = "0.1.0"
+description = "Build a docker container as your workspace."
+authors = ["Mr.Blue <silverhugh.77@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+docker-compose = "^1.29.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

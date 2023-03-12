@@ -1,7 +1,8 @@
 [tool.poetry]
 name = "dockerlab"
-version = "0.1.0"
+version = "0.2.4"
 description = "Build a docker container as your workspace."
+homepage = "https://github.com/hughplay/dockerlab"
 authors = ["Mr.Blue <silverhugh.77@gmail.com>"]
 license = "MIT"
 readme = "README.md"
@@ -9,6 +10,9 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 docker-compose = "^1.29.2"
+
+[tool.poetry.scripts]
+dockerlab = "dockerlab.cli:main"
 
 
 [build-system]

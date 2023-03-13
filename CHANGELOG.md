@@ -8,6 +8,7 @@
     - form: cli
     - functions
       - `[template]`: multiple availabe Dockerfile templates
+    - github workflow
 
 ## 0.2
 

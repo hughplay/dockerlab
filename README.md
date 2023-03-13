@@ -55,7 +55,7 @@ pip install dockerlab
 Create a new dockerlab project:
 
 ```bash
-dockerlab init <project_name>
+dockerlab new <project_name>
 ```
 
 Or init a dockerlab project in the current directory:

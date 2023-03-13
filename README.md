@@ -3,8 +3,8 @@
 
 <h1>DockerLab</h1>
 
+[![Dockerlab](https://img.shields.io/pypi/v/dockerlab?color=blue&label=dockerlab&style=flat-square)](https://pypi.org/project/dockerlab/)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)
-[![](docs/_static/imgs/hydra.svg)](https://hydra.cc)
 [![](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square&labelColor=gray)](#license)
 
 *Build a docker container as your workspace.*

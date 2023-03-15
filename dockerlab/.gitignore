@@ -1,5 +1,6 @@
 
 log/
 data/
-container_home
+container_home/
+.env
 .DS_Store

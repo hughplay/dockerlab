@@ -3,9 +3,10 @@
 
 <h1>DockerLab</h1>
 
-[![Dockerlab](https://img.shields.io/pypi/v/dockerlab?color=blue&label=dockerlab&style=flat-square)](https://pypi.org/project/dockerlab/)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/hughplay/dockerlab/poetry-publish.yml?style=flat-square)](https://github.com/hughplay/dockerlab/actions)
+[![pypi](https://img.shields.io/pypi/v/dockerlab?color=blue&label=pypi&style=flat-square)](https://pypi.org/project/dockerlab/)
 [![](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square&labelColor=gray)](#license)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/engine/)
 
 *Build a docker container as your workspace.*
 

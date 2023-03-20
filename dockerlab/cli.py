@@ -2,15 +2,8 @@ from pathlib import Path
 
 import click
 
-
-PROJECT_DIR = Path(__file__).parent.resolve()
-FILES = [
-    "docker-compose.yml",
-    "docker",
-    "docker.py",
-    ".gitignore",
-]
-MAX_CHUNK_SIZE = 4096
+from .template import assemble_template, get_post_templates, get_templates
+from .utils import FILES, copy_target, create_project_dir, write_file
 
 
 @click.group()
@@ -20,91 +13,79 @@ def main():
 
 @main.command()
 @click.argument("name")
-def new(name):
+@click.option(
+    "-t", "--template", type=click.Choice(get_templates()), default="default"
+)
+@click.option("--full", is_flag=True)
+@click.option(
+    "-p", "--post", multiple=True, type=click.Choice(get_post_templates())
+)
+def new(name, template="default", full=False, post=None):
     project_dir = create_project_dir(name)
     if project_dir is None:
         return
     for target in FILES:
         copy_target(project_dir, target)
+    write_file(
+        project_dir / "docker" / "Dockerfile",
+        assemble_template(template, full, post),
+    )
 
 
 @main.command()
 @click.argument("directory")
-def init(directory="."):
+@click.option(
+    "-t", "--template", type=click.Choice(get_templates()), default="default"
+)
+@click.option("--full", is_flag=True)
+@click.option(
+    "-p", "--post", multiple=True, type=click.Choice(get_post_templates())
+)
+def init(directory=".", template="default", full=False, post=None):
     project_dir = Path(directory).resolve()
     for target in FILES:
         copy_target(project_dir, target)
+    write_file(
+        project_dir / "docker" / "Dockerfile",
+        assemble_template(template, full, post),
+    )
 
 
-def create_project_dir(name):
-    project_dir = Path(name).resolve()
-    if project_dir.exists():
-        print(f"Path {project_dir} already exists.")
-        project_dir = None
-    else:
-        project_dir.mkdir()
-
-    return project_dir
+@main.command()
+def ls():
+    get_templates(verbose=True)
+    print()
+    get_post_templates(verbose=True)
 
 
-def copy_target(target_dir, target):
-    src_target = (PROJECT_DIR / target).resolve()
-    if src_target.is_dir():
-        for f in src_target.iterdir():
-            copy_target(target_dir, f.relative_to(PROJECT_DIR))
-    else:
-        dst_target = (target_dir / target).resolve()
-        if dst_target.exists() and not is_content_equal(src_target, dst_target):
-            print(
-                f"File {target} already exists. "
-                "Overwrite (o), merge (m) or skip (s)?"
-            )
-            while True:
-                value = input("(o/m/s) [o]: ")
-                if value == "o" or value == "":
-                    dst_target.unlink()
-                    copy_file(src_target, dst_target)
-                elif value == "m":
-                    merge_file(src_target, dst_target)
-                elif value == "s":
-                    print(f"Skipping {dst_target}")
-                else:
-                    continue
-                break
-        else:
-            copy_file(src_target, dst_target)
+@main.command()
+@click.argument(
+    "template", type=click.Choice(get_templates()), default="default"
+)
+@click.option("--full", is_flag=True)
+@click.option(
+    "-p", "--post", multiple=True, type=click.Choice(get_post_templates())
+)
+def use(template, full, post):
+    text = assemble_template(template, full=full, post_templates=post)
+    f_dst = Path(".") / "docker" / "Dockerfile"
+    write_file(f_dst, text)
+    print(f"Template {template} applied. See {f_dst} for details.")
 
 
-def copy_file(f_src, f_dst):
-    if not f_dst.parent.exists():
-        f_dst.parent.mkdir(parents=True)
-    with open(f_src, "rb") as src, open(f_dst, "wb") as dst:
-        dst.write(src.read())
-
-
-def merge_file(f_src, f_dst):
-    with open(f_src, "r") as src, open(f_dst, "r+") as dst:
-        src_lines = src.readlines()
-        dst_lines = dst.readlines()
-        dst_lines += [
-            line
-            for line in src_lines
-            if line not in dst_lines and line.strip() != ""
-        ]
-        dst.seek(0)
-        dst.writelines(dst_lines)
-
-
-def is_content_equal(f1, f2):
-    with open(f1, "rb") as f1, open(f2, "rb") as f2:
-        while True:
-            chunk1 = f1.read(MAX_CHUNK_SIZE)
-            chunk2 = f2.read(MAX_CHUNK_SIZE)
-            if chunk1 != chunk2:
-                return False
-            if not chunk1:
-                break
-    return True
+@main.command()
+@click.argument(
+    "template", type=click.Choice(get_templates()), default="default"
+)
+@click.option("--full", is_flag=True)
+@click.option(
+    "-p", "--post", multiple=True, type=click.Choice(get_post_templates())
+)
+def add(template, full, post):
+    text = assemble_template(template, full=full, post_templates=post)
+    f_dst = Path(".") / "docker" / f"Dockerfile.{template}"
+    write_file(f_dst, text)
+    print(f"Template {template} applied. See {f_dst} for details.")
 
 
 if __name__ == "__main__":

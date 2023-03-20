@@ -1,24 +1,3 @@
-# ==================================================
-# This is the full Dockerfile for the environment building.
-#
-# Sections with * have been build into an existing image:
-# deepbase/project:codebase
-# This image can be found in docker hub:
-# https://hub.docker.com/r/deepbase/project/tags
-# ==================================================
-
-# ==================================================
-# *Based on cuda11.1-cudnn8-devel-ubuntu20.04
-#
-# Other base images are listed in:
-# https://hub.docker.com/r/nvidia/cuda/tags
-#
-# The version of some basic packages:
-#   - Python: 3.8
-#   - Pytorch: 1.8.2
-#
-# Change these versions by yourself if needed.
-# ==================================================
 FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
 
@@ -29,10 +8,6 @@ SHELL ["/bin/bash", "-cu"]
 # Set environment variables
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-
-
-# TUNA Mirror (optional)
-# COPY project/codebase/misc/sources.list.ubuntu20.04 /etc/apt/sources.list
 
 
 # Install basic packages for compiling and building
@@ -66,24 +41,6 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     && rm -f /tmp/install-conda.sh \
     && conda install -y python=${PYTHON_VERSION} \
     && conda clean -y --all
-
-
-# Install Pytorch LTS (1.8.2)
-# you can find other versions and installation commands from:
-# https://pytorch.org/get-started/previous-versions/
-RUN pip install --no-cache-dir \
-    torch==1.8.2 \
-    torchvision==0.9.2 \
-    torchaudio==0.8.2 \
-    --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu111
-
-# Below is the example installation command for stable versions:
-# ENV PYTORCH_VERSION=1.8.2
-# ENV TORCHVISION_VERSION=0.9.2
-# RUN pip install --no-cache-dir \
-#     torch==${PYTORCH_VERSION} \
-#     torchvision==${TORCHVISION_VERSION} \
-#     -f https://download.pytorch.org/whl/torch_stable.html
 
 
 # ==================================================
@@ -121,6 +78,7 @@ RUN chsh -s `which zsh` \
     && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH:-~/.oh-my-zsh}/custom/plugins/zsh-autosuggestions\
     && sed -i.bak '/plugin/s/(.*)/(git zsh-autosuggestions)/' ~/.zshrc
 
+
 # make the color of zsh-autosuggestions right
 ENV TERM xterm-256color
 
@@ -137,26 +95,27 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
 
 
 # Install Tmux
-# RUN apt-get update && apt-get install -y libevent-dev ncurses-dev automake pkg-config \
-#     && cd /tmp \
-#     && wget -O tmux-2.8.tar.gz https://github.com/tmux/tmux/archive/2.8.tar.gz \
-#     && tar zxvf tmux-2.8.tar.gz \
-#     && cd tmux-2.8 \
-#     && ./autogen.sh \
-#     && ./configure --prefix=/usr/local \
-#     && make \
-#     && make install \
-#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libevent-dev ncurses-dev automake pkg-config \
+    && cd /tmp \
+    && wget -O tmux-2.8.tar.gz https://github.com/tmux/tmux/archive/2.8.tar.gz \
+    && tar zxvf tmux-2.8.tar.gz \
+    && cd tmux-2.8 \
+    && ./autogen.sh \
+    && ./configure --prefix=/usr/local \
+    && make \
+    && make install \
+    && rm -rf /var/lib/apt/lists/*
 
 # Tmux configuration
-# RUN git clone https://github.com/hughplay/tmux-config.git /tmp/tmux-config \
-#     && bash /tmp/tmux-config/install.sh \
-#     && rm -rf /tmp/tmux-config \
-#     && echo "set -g default-shell `which zsh`" >> ~/.tmux.conf
+RUN git clone https://github.com/hughplay/tmux-config.git /tmp/tmux-config \
+    && bash /tmp/tmux-config/install.sh \
+    && rm -rf /tmp/tmux-config \
+    && echo "set -g default-shell `which zsh`" >> ~/.tmux.conf
 
 
 # Install lightvim, a configuration for vim
 # RUN wget https://raw.githubusercontent.com/hughplay/lightvim/master/install.sh -O - | sh
+
 
 # ==================================================
 # *Fonts installation
@@ -165,7 +124,14 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
 # Question: "Which font looks best in a scientific figure?"
 # Answer: "Arial or Helvetica, always."
 # https://pubs.acs.org/doi/10.1021/acs.chemmater.6b00306
+#
+# fonts include:
+#   - Arial (recommended)
+#   - Helvetica
+#   - Palatino Linotype
+#   - Times New Roman
 # ==================================================
+
 
 RUN cd /tmp \
     && wget https://github.com/hughplay/memo/raw/master/code/snippet/drawing/plot_fonts.tar.gz \
@@ -173,60 +139,3 @@ RUN cd /tmp \
     && cp plot_fonts/* /usr/share/fonts/truetype/ \
     && rm -rf plot_fonts.tar.gz plot_fonts \
     && fc-cache -fv
-
-
-# ==================================================
-# Install python packages
-# ==================================================
-
-# Setup TUNA mirror (optional)
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-COPY misc/.condarc /root/.condarc
-
-# By default, install packages from `requirements.txt` with pip.
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -r /tmp/requirements.txt \
-    && rm -f /tmp/requirements.txt
-
-
-# Another way is installing packages from a `env.yaml` with conda.
-# COPY env.yaml /tmp/env.yaml
-# RUN conda env create -f /tmp/env.yaml && rm -f /tmp/env.yaml
-
-
-# ==================================================
-# Post-installation steps
-#
-# Create a user that has the same UID and GID as the host user. This will
-# prevent many privileges issues.
-# ==================================================
-
-# COPY .localrc
-COPY misc/.localrc /root
-RUN echo ". ~/.localrc" >> ~/.zshrc
-
-
-# Add a user with the same UID and GID as the host user, to prevent privilege issues.
-ARG USER_ID=1011
-ARG GROUP_ID=1011
-ARG USER_NAME=docker
-RUN if [ $USER_NAME != "root" ] ; \
-    then addgroup --gid ${GROUP_ID} ${USER_NAME} \
-    && adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID ${USER_NAME} \
-    && usermod -aG sudo ${USER_NAME} \
-    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers ; fi
-
-
-# Copy installed configuration files from root to user
-COPY misc/init_workspace /usr/local/bin
-RUN chmod +x /usr/local/bin/init_workspace
-RUN /usr/local/bin/init_workspace --user ${USER_NAME} --home /home/${USER_NAME}
-RUN rsync -a /home/${USER_NAME}/ /${USER_NAME}_home_bak
-
-
-# Switch to the created user
-USER ${USER_NAME}
-
-
-# Set working directory to /project
-WORKDIR "/project"

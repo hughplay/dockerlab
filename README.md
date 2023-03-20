@@ -3,9 +3,9 @@
 
 <h1>DockerLab</h1>
 
-[![Package Building Status](https://img.shields.io/github/actions/workflow/status/hughplay/dockerlab/poetry-publish.yml?label=Package%20Build)](https://github.com/hughplay/dockerlab/actions)
+[![Package Building Status](https://img.shields.io/github/actions/workflow/status/hughplay/dockerlab/poetry-publish.yml?label=Package%20Build&style=flat-square)](https://github.com/hughplay/dockerlab/actions)
 [![pypi](https://img.shields.io/pypi/v/dockerlab?color=blue&label=pypi&style=flat-square)](https://pypi.org/project/dockerlab/)
-[![Image Building Status](https://img.shields.io/github/actions/workflow/status/hughplay/dockerlab/images-build.yml?label=Image%20Build)](https://github.com/hughplay/dockerlab/actions)
+[![Image Building Status](https://img.shields.io/github/actions/workflow/status/hughplay/dockerlab/images-build.yml?label=Image%20Build&style=flat-square)](https://github.com/hughplay/dockerlab/actions)
 [![](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square&labelColor=gray)](#license)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://docs.docker.com/engine/)
 

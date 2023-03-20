@@ -86,7 +86,6 @@ def merge_file(f_src, f_dst):
     with open(f_src, "r") as src, open(f_dst, "r+") as dst:
         src_lines = src.readlines()
         dst_lines = dst.readlines()
-        breakpoint()
         dst_lines += [
             line
             for line in src_lines

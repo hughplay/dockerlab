@@ -82,10 +82,11 @@ RUN apt-get install -y --allow-downgrades --allow-change-held-packages --no-inst
 # Install kalign 3
 RUN git clone https://github.com/TimoLassmann/kalign.git /tmp/kalign \
     && cd /tmp/kalign \
-    && ./autogen.sh \
-    && ./configure \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
     && make \
-    && make check \
+    && make test \
     && make install \
     && rm -rf /tmp/kalign
 

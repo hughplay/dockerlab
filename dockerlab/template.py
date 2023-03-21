@@ -9,6 +9,8 @@ DEFAULT_POST_TEMPLATES = {
     "workspace_cuda_11_7": ["python", "default"],
     "workspace_pytorch_1_13": ["python", "default"],
     "workspace_pytorch_2_0": ["python", "default"],
+    "workspace_protein": ["python", "default"],
+    "runtime_node_lts": ["node", "default"],
 }
 
 

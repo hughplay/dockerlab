@@ -59,7 +59,7 @@ Create a new dockerlab project:
 dockerlab new <project_name>
 ```
 
-Or init a dockerlab project in the current directory:
+Or init a dockerlab environment for the existing project:
 
 ```bash
 dockerlab init .
@@ -69,27 +69,31 @@ This will setup a few files and directories, the structure is as follows:
 
 ```bash
 .
-├── docker
+├── docker/
 │   ├── Dockerfile
-│   ├── Dockerfile.full
-│   ├── misc
-│   │   ├── init_workspace
-│   │   ├── sources.list.ubuntu18.04
-│   │   └── sources.list.ubuntu20.04
-│   └── requirements.txt
+│   └── misc/
 ├── docker-compose.yml
-└── docker.py
+├── docker.py
+└── .gitignore
 ```
 
 
 **3. DIY your own workspace environment**
 
-In general, you only need to modify `docker/Dockerfile` and `requirements.txt` to customize your own workspace environment. Files you may care about:
+In general, you only need to modify `docker/Dockerfile` to customize your own workspace environment. Files you may care about:
 
 - `docker/Dockerfile`: The dockerfile for building the docker image.
-- `requirements.txt`: The python packages you want to install in the container.
 - `docker-compose.yml`: The docker-compose file for building the docker container.
 - `docker.py`: The python script for building and starting the container.
+
+
+We have prepared several templates and pre-built docker images for you. You can replace the default `docker/Dockerfile` with the template you like by running the following command:
+
+```bash
+dockerlab use <template_name>
+```
+
+The available templates can be listed by `dockerlab ls`, and the details of each template can be found in [dockerlab/templates](dockerlab/templates).
 
 
 **4. Build and start the container**

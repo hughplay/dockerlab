@@ -5,12 +5,13 @@ TEMPLATES_DIR = Path(__file__).parent.resolve() / "templates"
 POST_TEMPLATES_DIR = Path(__file__).parent.resolve() / "post_templates"
 OFFICIAL_HUB = "deepbase/dockerlab"
 DEFAULT_POST_TEMPLATES = {
+    "workspace_base": ["python", "default"],
     "workspace_cuda_11_1": ["python", "default"],
     "workspace_cuda_11_7": ["python", "default"],
+    "runtime_node_lts": ["node", "default"],
     "workspace_pytorch_1_13": ["python", "default"],
     "workspace_pytorch_2_0": ["python", "default"],
     "workspace_protein": ["python", "default"],
-    "runtime_node_lts": ["node", "default"],
 }
 
 

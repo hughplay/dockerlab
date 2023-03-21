@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dockerlab"
-version = "0.3.1"
+version = "0.3.2"
 description = "Build a docker container as your workspace."
 homepage = "https://github.com/hughplay/dockerlab"
 authors = ["Mr.Blue <silverhugh.77@gmail.com>"]

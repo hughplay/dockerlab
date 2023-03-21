@@ -12,13 +12,14 @@ jobs:
     strategy:
       matrix:
         template:
+          - workspace_base
           - workspace_cuda_11_1
           - workspace_cuda_11_7
+          - runtime_node_lts
           - workspace_pytorch_1_13
           - workspace_pytorch_2_0
           - workspace_protein
-          - runtime_node_lts
-      max-parallel: 2
+      max-parallel: 4
     steps:
       - uses: actions/checkout@v3
 

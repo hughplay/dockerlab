@@ -25,7 +25,7 @@
 
 - **Easy to use**: Just a few commands to build and start a docker container.
 - **Customizable**: You can customize the docker image and the python packages you want to install in the container.
-- **Reproducible**: You can build the same docker image on different machines. Say bye bye to the [`It works on my machine`](https://www.reddit.com/r/ProgrammerHumor/comments/70we66/it_works_on_my_machine/) problem.
+- **Reproducible**: You can build the same docker image on different machines. Say bye bye to the ["It works on my machine"](https://www.reddit.com/r/ProgrammerHumor/comments/70we66/it_works_on_my_machine/) problem.
 - **Convenient**: We made some convenient setups for you, including tools and functions:
   - [miniconda](https://docs.conda.io/en/latest/miniconda.html)
   - [oh-my-zsh](https://ohmyz.sh/)
@@ -39,8 +39,8 @@
       - model checkpoints
       - etc.
   - sharing network with the host (no need extra port mapping)
-  - (optional) [tmux](https://github.com/tmux/tmux/wiki)
-  - (optional) [lightvim](https://github.com/hughplay/lightvim)
+  - [tmux](https://github.com/tmux/tmux/wiki)
+  - [lightvim](https://github.com/hughplay/lightvim)
 
 
 ## Quick Start

@@ -95,6 +95,11 @@ dockerlab use <template_name>
 
 The available templates can be listed by `dockerlab ls`, and the details of each template can be found in [dockerlab/templates](dockerlab/templates).
 
+By default, the generated `docker/Dockerfile` will use pre-built docker images if there exists. You can also get the full dockerfile by running the following command:
+
+```bash
+dockerlab use <template_name> --full
+```
 
 **4. Build and start the container**
 

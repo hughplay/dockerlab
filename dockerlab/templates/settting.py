@@ -1,3 +1,4 @@
+DEFAULT_TEMPLATE = "workspace_base"
 TEMPLATE_SETTING = {
     "workspace_base": {
         "post_templates": ["python", "default"],

@@ -4,6 +4,7 @@ import click
 
 from .asset import TARGET_DOCKER_DIR, get_copy_list
 from .template import assemble_template, get_post_templates, get_templates
+from .templates.settting import DEFAULT_TEMPLATE
 from .utils import copy_targets, create_project_dir, write_file
 
 
@@ -25,8 +26,7 @@ def main():
     "-t",
     "--template",
     type=click.Choice(get_templates()),
-    default="default",
-    help="Specify a template for the project (default: default).",
+    help=f"Specify a template for the project (default: {DEFAULT_TEMPLATE}).",
 )
 @click.option(
     "--full",
@@ -40,7 +40,7 @@ def main():
     type=click.Choice(get_post_templates()),
     help="Include one or more post templates in the project directory.",
 )
-def new(name, template="default", full=False, post=None):
+def new(name, template=None, full=False, post=None):
     """Create a new project directory with predefined templates.
 
     Usage: python <script_name> new [OPTIONS] <name>
@@ -78,8 +78,7 @@ def new(name, template="default", full=False, post=None):
     "-t",
     "--template",
     type=click.Choice(get_templates()),
-    default="default",
-    help="Specify a template for the project (default: default).",
+    help=f"Specify a template for the project (default: {DEFAULT_TEMPLATE}).",
 )
 @click.option(
     "--full",
@@ -93,7 +92,7 @@ def new(name, template="default", full=False, post=None):
     type=click.Choice(get_post_templates()),
     help="Include one or more post templates in the project directory.",
 )
-def init(directory=".", template="default", full=False, post=None):
+def init(directory=".", template=None, full=False, post=None):
     """Initialize a new project in the target directory with the specified
     options."""
     project_dir = Path(directory).resolve()

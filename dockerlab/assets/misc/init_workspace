@@ -20,8 +20,8 @@ echo
 echo "----------------------------------------------------"
 echo "Copy conda, pip, tmux, zsh configurations into $HOME..."
 echo "----------------------------------------------------"
+echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.zshrc
 rsync -a --stats --ignore-missing-args --chown=$USER:$USER \
-    /root/.localrc \
     /root/.conda \
     /root/.condarc \
     /root/.config \

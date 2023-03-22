@@ -1,11 +1,5 @@
 from pathlib import Path
 
-FILES = [
-    "docker-compose.yml",
-    "docker",
-    "docker.py",
-    ".gitignore",
-]
 MAX_CHUNK_SIZE = 4096
 PROJECT_DIR = Path(__file__).parent.resolve()
 
@@ -21,32 +15,31 @@ def create_project_dir(name):
     return project_dir
 
 
-def copy_target(target_dir, target):
-    src_target = (PROJECT_DIR / target).resolve()
-    if src_target.is_dir():
-        for f in src_target.iterdir():
-            copy_target(target_dir, f.relative_to(PROJECT_DIR))
+def copy_targets(copy_list):
+    for src, dst in copy_list:
+        copy_target(src, dst)
+
+
+def copy_target(src, dst):
+    if dst.exists() and not is_content_equal(src, dst):
+        print(
+            f"File {dst} already exists and is different from the template. "
+            "Overwrite (o), merge (m) or skip (s)?"
+        )
+        while True:
+            value = input("(o/m/s) [o]: ")
+            if value == "o" or value == "":
+                dst.unlink()
+                copy_file(src, dst)
+            elif value == "m":
+                merge_file(src, dst)
+            elif value == "s":
+                print(f"Skipping {dst}")
+            else:
+                continue
+            break
     else:
-        dst_target = (target_dir / target).resolve()
-        if dst_target.exists() and not is_content_equal(src_target, dst_target):
-            print(
-                f"File {target} already exists. "
-                "Overwrite (o), merge (m) or skip (s)?"
-            )
-            while True:
-                value = input("(o/m/s) [o]: ")
-                if value == "o" or value == "":
-                    dst_target.unlink()
-                    copy_file(src_target, dst_target)
-                elif value == "m":
-                    merge_file(src_target, dst_target)
-                elif value == "s":
-                    print(f"Skipping {dst_target}")
-                else:
-                    continue
-                break
-        else:
-            copy_file(src_target, dst_target)
+        copy_file(src, dst)
 
 
 def copy_file(f_src, f_dst):

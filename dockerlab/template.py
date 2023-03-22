@@ -1,25 +1,26 @@
 from pathlib import Path
 from typing import List
 
+from .templates.settting import TEMPLATE_SETTING
+
 TEMPLATES_DIR = Path(__file__).parent.resolve() / "templates"
 POST_TEMPLATES_DIR = Path(__file__).parent.resolve() / "post_templates"
 OFFICIAL_HUB = "deepbase/dockerlab"
-DEFAULT_POST_TEMPLATES = {
-    "workspace_base": ["python", "default"],
-    "workspace_cuda_11_1": ["python", "default"],
-    "workspace_cuda_11_7": ["python", "default"],
-    "runtime_node_lts": ["node", "default"],
-    "workspace_pytorch_1_13": ["python", "default"],
-    "workspace_pytorch_2_0": ["python", "default"],
-    "workspace_protein": ["python", "default"],
-}
+IGNORE_TEMPLATE_NAME = ["__pycache__"]
+
+
+def resolve_template(tag: str):
+    if tag == "default":
+        real_temp_dir = (TEMPLATES_DIR / "default").resolve()
+        tag = real_temp_dir.name
+    return tag
 
 
 def get_templates(verbose=False):
     templates = [
         (t.name, t)
         for t in TEMPLATES_DIR.iterdir()
-        if t.is_dir() or t.is_symlink()
+        if (t.is_dir() or t.is_symlink()) and t.name not in IGNORE_TEMPLATE_NAME
     ]
     templates.sort(key=lambda x: (not x[1].is_symlink(), x[0]))
     if verbose:
@@ -49,10 +50,7 @@ def get_post_templates(verbose=False):
 def assemble_template(
     tag: str, full: bool = False, post_templates: List[str] = None
 ):
-    if tag == "default":
-        real_temp_dir = (TEMPLATES_DIR / "default").resolve()
-        tag = real_temp_dir.name
-
+    tag = resolve_template(tag)
     templates = get_templates()
     if tag not in templates:
         raise ValueError(f"Template {tag} not found.")
@@ -63,7 +61,7 @@ def assemble_template(
         temp_text = extend_template(temp_text, templates)
 
     if post_templates is None or len(post_templates) == 0:
-        post_templates = DEFAULT_POST_TEMPLATES.get(tag, [])
+        post_templates = TEMPLATE_SETTING[tag].get("post_templates", [])
 
     for post in post_templates:
         post_temp = POST_TEMPLATES_DIR / f"{post}.txt"

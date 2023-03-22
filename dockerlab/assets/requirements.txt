@@ -1,23 +1,23 @@
 # =============================================
 # Lightning
 # =============================================
-torch>=1.8.1
-torchvision>=0.9.1
-pytorch-lightning==1.6.5
-torchmetrics
+# torch>=1.8.1
+# torchvision>=0.9.1
+# pytorch-lightning==1.6.5
+# torchmetrics
 
 # =============================================
 # Hydra
 # =============================================
-hydra-core==1.1.0
-hydra-colorlog
+# hydra-core==1.1.0
+# hydra-colorlog
 # hydra-optuna-sweeper>=1.1.0
-omegaconf==2.1.0
+# omegaconf==2.1.0
 
 # =============================================
 # Logging
 # =============================================
-wandb
+# wandb
 
 # =============================================
 # Common Used Tools

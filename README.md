@@ -27,29 +27,31 @@
 - **Customizable**: You can customize the docker image and the python packages you want to install in the container.
 - **Reproducible**: You can build the same docker image on different machines. Say bye bye to the ["It works on my machine"](https://www.reddit.com/r/ProgrammerHumor/comments/70we66/it_works_on_my_machine/) problem.
 - **Convenient**: We made some convenient setups for you, including tools and functions:
-  - [miniconda](https://docs.conda.io/en/latest/miniconda.html)
-  - [oh-my-zsh](https://ohmyz.sh/)
-  - [run docker within docker](https://www.docker.com/blog/docker-can-now-run-within-docker/)
-  - make the user have the same uid and gid as the host (prevent permission problems)
-  - mount the home of the container to the host (by hacking)
+  - tools: [oh-my-zsh](https://ohmyz.sh/), [docker within docker](https://www.docker.com/blog/docker-can-now-run-within-docker/), [tmux](https://github.com/tmux/tmux/wiki), [lightvim](https://github.com/hughplay/lightvim)
+  - free of permission problems: same uid and gid as the host
+  - reversely mounting $HOME directory from container to host
     - easy to share `~/.ssh` and `~/.gitconfig`
-    - files will not be lost even if the container is removed
-      - zsh history
-      - configuration files
-      - model checkpoints
-      - etc.
-  - sharing network with the host (no need extra port mapping)
-  - [tmux](https://github.com/tmux/tmux/wiki)
-  - [lightvim](https://github.com/hughplay/lightvim)
+    - files will not be lost even if the container is removed, e.g., zsh history, configuration files, model checkpoints, ...
+  - free of port mapping: sharing network with the host
+- **Pre-built Images**: We provide several basic [pre-built images](dockerlab/templates/) for quickly setting up your own workspace environment.
 
 
 ## Quick Start
 
 **1. Install dockerlab**
 
+Install dockerlab with pip:
+
 ```bash
 pip install dockerlab
 ```
+
+Or install the latest version from source:
+
+```bash
+pip install git+https://github.com/hughplay/dockerlab.git
+```
+
 
 **2. Setup a dockerlab project**
 

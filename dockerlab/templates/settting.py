@@ -29,3 +29,12 @@ TEMPLATE_SETTING = {
         "assets": ["misc/", "requirements.txt"],
     },
 }
+PREBUILT_TEMPLATES = {
+    "workspace_base": "deepbase/dockerlab:workspace_base",
+    "workspace_cuda_11_1": "deepbase/dockerlab:workspace_cuda_11_1",
+    "workspace_cuda_11_7": "deepbase/dockerlab:workspace_cuda_11_7",
+    "runtime_node_lts": "deepbase/dockerlab:runtime_node_lts",
+    "workspace_pytorch_1_13": "deepbase/dockerlab:workspace_pytorch_1_13",
+    "workspace_pytorch_2_0": "deepbase/dockerlab:workspace_pytorch_2_0",
+    "workspace_protein": "deepbase/dockerlab:workspace_protein",
+}

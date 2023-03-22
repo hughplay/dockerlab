@@ -1,7 +1,11 @@
 from pathlib import Path
 from typing import List
 
-from .templates.settting import DEFAULT_TEMPLATE, TEMPLATE_SETTING
+from .templates.settting import (
+    DEFAULT_TEMPLATE,
+    PREBUILT_TEMPLATES,
+    TEMPLATE_SETTING,
+)
 
 TEMPLATES_DIR = Path(__file__).parent.resolve() / "templates"
 POST_TEMPLATES_DIR = Path(__file__).parent.resolve() / "post_templates"
@@ -49,18 +53,22 @@ def get_post_templates(verbose=False):
 def assemble_template(
     name: str, full: bool = False, post_templates: List[str] = None
 ):
-    tag = resolve_template(name)
-    templates = get_templates()
-    if tag not in templates:
-        raise ValueError(f"Template {tag} not found.")
-    temp = TEMPLATES_DIR / tag / "Dockerfile"
-    temp_text = temp.read_text().strip()
+    name = resolve_template(name)
+
+    if name in PREBUILT_TEMPLATES:
+        temp_text = f"FROM {PREBUILT_TEMPLATES[name]}"
+    else:
+        templates = get_templates()
+        if name not in templates:
+            raise ValueError(f"Template {name} not found.")
+        temp = TEMPLATES_DIR / name / "Dockerfile"
+        temp_text = temp.read_text().strip()
 
     if full:
         temp_text = extend_template(temp_text, templates)
 
     if post_templates is None or len(post_templates) == 0:
-        post_templates = TEMPLATE_SETTING[tag].get("post_templates", [])
+        post_templates = TEMPLATE_SETTING[name].get("post_templates", [])
 
     for post in post_templates:
         post_temp = POST_TEMPLATES_DIR / f"{post}.txt"
@@ -68,7 +76,7 @@ def assemble_template(
         temp_text += "\n" * 3 + post_temp_text
 
     temp_text = (
-        f"# dockerlab template: {tag}"
+        f"# dockerlab template: {name}"
         + (" (full)" if full else "")
         + "\n# https://github.com/hughplay/dockerlab"
         + "\n\n"

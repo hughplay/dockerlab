@@ -2,6 +2,7 @@ from pathlib import Path
 
 import click
 
+from . import __version__
 from .asset import TARGET_DOCKER_DIR, get_copy_list
 from .template import assemble_template, get_post_templates, get_templates
 from .templates.settting import DEFAULT_TEMPLATE
@@ -9,6 +10,7 @@ from .utils import copy_targets, create_project_dir, write_file
 
 
 @click.group()
+@click.version_option(__version__)
 def main():
     """A command line tool to create a new project directory with predefined
     templates.

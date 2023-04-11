@@ -1,11 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from .templates.settting import (
-    DEFAULT_TEMPLATE,
-    PREBUILT_TEMPLATES,
-    TEMPLATE_SETTING,
-)
+from .templates.settting import DEFAULT_TEMPLATE, TEMPLATE_SETTING
 
 TEMPLATES_DIR = Path(__file__).parent.resolve() / "templates"
 POST_TEMPLATES_DIR = Path(__file__).parent.resolve() / "post_templates"
@@ -27,12 +23,15 @@ def get_templates(verbose=False):
     ]
     templates.sort(key=lambda x: (not x[1].is_symlink(), x[0]))
     if verbose:
-        print("Available templates:")
+        print("Available templates (* is default):")
         for name, t in templates:
-            if name == DEFAULT_TEMPLATE:
-                print(f"  - {name} (default)")
-            else:
-                print(f"  - {name}")
+            str_template = (
+                f"  {'*' if name == DEFAULT_TEMPLATE else '-'} {name}"
+            )
+            cuda = TEMPLATE_SETTING[name].get("cuda", False)
+            if cuda:
+                str_template += f" [cuda {cuda}]"
+            print(str_template)
     return [name for name, _ in templates]
 
 
@@ -55,8 +54,9 @@ def assemble_template(
 ):
     name = resolve_template(name)
 
-    if name in PREBUILT_TEMPLATES:
-        temp_text = f"FROM {PREBUILT_TEMPLATES[name]}"
+    prebuilt_image = TEMPLATE_SETTING[name].get("prebuilt", False)
+    if prebuilt_image:
+        temp_text = f"FROM {prebuilt_image}"
     else:
         templates = get_templates()
         if name not in templates:

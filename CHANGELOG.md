@@ -5,6 +5,7 @@
 
 - build docker images to dockerhub
   - [ ] copy extra files
+  - [ ] plot the logic of template assembly
 
 ## 0.3
 

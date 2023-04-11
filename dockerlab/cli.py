@@ -67,6 +67,11 @@ def new(name, template=None, full=False, post=None):
     print(
         f"Project {name} created. Build the container and get started with:"
         f"\n> cd {name}"
+        "\n\n# Customize Dockerfile or use default templates."
+        "\n  # List available templates. Details can be found at: https://github.com/hughplay/dockerlab/tree/main/dockerlab/templates"
+        "\n  > dockerlab ls"
+        "\n  # Use template."
+        "\n  > dockerlab use <template>"
         "\n\n# Build and start the container."
         "\n> python docker.py startd"
         "\n\n# Get into the container."
@@ -105,6 +110,11 @@ def init(directory=".", template=None, full=False, post=None):
     )
     print(
         "Project initialized."
+        "\n\n# Customize Dockerfile or use default templates."
+        "\n  # List available templates. Details can be found at: https://github.com/hughplay/dockerlab/tree/main/dockerlab/templates"
+        "\n  > dockerlab ls"
+        "\n  # Use template."
+        "\n  > dockerlab use <template>"
         "\n\n# Build and start the container."
         "\n> python docker.py startd"
         "\n\n# Get into the container."

@@ -147,4 +147,4 @@ python docker.py
 
 ## 许可证
 
-Dockerlab使用[MIT许可证发布](LICENSE)。
+Dockerlab使用[MIT许可证](LICENSE)。

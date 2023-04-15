@@ -53,12 +53,12 @@ def assemble_template(
     name: str, full: bool = False, post_templates: List[str] = None
 ):
     name = resolve_template(name)
+    templates = get_templates()
 
     prebuilt_image = TEMPLATE_SETTING[name].get("prebuilt", False)
     if prebuilt_image:
         temp_text = f"FROM {prebuilt_image}"
     else:
-        templates = get_templates()
         if name not in templates:
             raise ValueError(f"Template {name} not found.")
         temp = TEMPLATES_DIR / name / "Dockerfile"

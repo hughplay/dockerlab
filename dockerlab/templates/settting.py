@@ -13,6 +13,12 @@ TEMPLATE_SETTING = {
         "cuda": "11.1",
         "prebuilt": "deepbase/dockerlab:workspace_cuda_11_1",
     },
+    "workspace_cuda_11_3": {
+        "post_templates": ["python", "default"],
+        "assets": ["misc/", "requirements.txt"],
+        "cuda": "11.3",
+        "prebuilt": "deepbase/dockerlab:workspace_cuda_11_3",
+    },
     "workspace_cuda_11_7": {
         "post_templates": ["python", "default"],
         "assets": ["misc/", "requirements.txt"],

@@ -14,6 +14,7 @@ jobs:
         template:
           - workspace_base
           - workspace_cuda_11_1
+          - workspace_cuda_11_3
           - workspace_cuda_11_7
           - runtime_node_lts
           - workspace_pytorch_1_13

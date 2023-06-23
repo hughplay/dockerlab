@@ -27,7 +27,7 @@ RUN /usr/local/bin/init_workspace --user ${USER_NAME} --home /home/${USER_NAME}
 
 
 # backup $HOME for reverse mounting $HOME
-RUN rsync -a /home/${USER_NAME}/ /${USER_NAME}_home_bak
+RUN rsync -a ${HOME}/ /${USER_NAME}_home_bak
 
 
 # Switch to the created user

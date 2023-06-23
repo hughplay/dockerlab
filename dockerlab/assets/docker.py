@@ -194,6 +194,10 @@ def _set_env(env_path=DEFAULT_ENV_PATH, verbose=False):
             ):
                 container_home.mkdir(parents=True, exist_ok=True)
         e["CONTAINER_HOME"] = str(container_home)
+        if e["USER_NAME"] != "root":
+            e["TARGET_HOME"] = f"/home/{e['USER_NAME']}"
+        else:
+            e["TARGET_HOME"] = "/root"
 
     e["COMPOSE_PROJECT_NAME"] = f"{e['PROJECT']}_{e['USER_NAME']}".lower()
     e.save()

@@ -37,8 +37,8 @@ services:
     command: >
       bash -c
       "sudo rsync -a --stats --chown=${USER_NAME}:${USER_NAME} --ignore-existing
-      /${USER_NAME}_home_bak/ /home/${USER_NAME}
-      && . /home/${USER_NAME}/.bashrc
+      /${USER_NAME}_home_bak/ ${TARGET_HOME}
+      && . ${TARGET_HOME}/.bashrc
       && sleep infinity"
 
     # mount the <directory in host> to the <directory in container>
@@ -50,4 +50,4 @@ services:
       - ${LOG_ROOT}:/log
       - type: bind
         source: ${CONTAINER_HOME}
-        target: /home/${USER_NAME}
+        target: ${TARGET_HOME}

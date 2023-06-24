@@ -119,6 +119,7 @@ def main():
             command = f"docker-compose exec {args.service} {SHELL}"
     else:
         command = f"docker-compose {args.action}"
+    command = "DOCKER_BUILDKIT=1 " + command
     print(f"> {command}\n")
     execute(command)
 

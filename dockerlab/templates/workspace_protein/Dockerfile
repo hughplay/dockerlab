@@ -49,7 +49,7 @@ RUN mkdir /tmp/hmmer \
 # Install BLAST
 RUN mkdir /tmp/blast \
     && cd /tmp/blast \
-    &&  wget -O ncbi-blast-2.13.0+-x64-linux.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.13.0+-x64-linux.tar.gz \
+    &&  wget -O ncbi-blast-2.13.0+-x64-linux.tar.gz https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.13.0/ncbi-blast-2.13.0+-x64-linux.tar.gz \
     && tar zxvf ncbi-blast-2.13.0+-x64-linux.tar.gz \
     && cp ncbi-blast-2.13.0+/bin/* /usr/local/bin/ \
     && rm -rf /tmp/blast

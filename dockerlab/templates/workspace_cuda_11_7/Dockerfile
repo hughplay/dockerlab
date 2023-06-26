@@ -102,6 +102,7 @@ RUN apt-get update && apt-get install -y libevent-dev ncurses-dev automake pkg-c
     && ./configure --prefix=/usr/local \
     && make \
     && make install \
+    && rm -rf /tmp/tmux-2.8 \
     && rm -rf /var/lib/apt/lists/*
 
 # Tmux configuration

@@ -115,7 +115,7 @@ RUN git clone https://github.com/hughplay/tmux-config.git /tmp/tmux-config \
 
 
 # Install lightvim, a configuration for vim
-RUN wget https://raw.githubusercontent.com/hughplay/lightvim/master/install.sh -O - | sh
+# RUN wget https://raw.githubusercontent.com/hughplay/lightvim/master/install.sh -O - | sh
 
 
 # ==================================================

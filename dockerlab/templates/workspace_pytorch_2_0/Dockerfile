@@ -10,8 +10,3 @@ RUN pip install --no-cache-dir \
     torchvision==0.15.1 \
     torchaudio==2.0.1 \
     --extra-index-url https://download.pytorch.org/whl/cu117
-
-
-RUN pip install --no-cache-dir \
-    pytorch-lightning==2.0.0 \
-    torchmetrics

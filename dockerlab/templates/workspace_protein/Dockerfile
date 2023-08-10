@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM deepbase/dockerlab:workspace_cuda_11_1
 
 RUN apt-get update

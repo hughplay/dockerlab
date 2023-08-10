@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
 
 # Set default RUN shell to /bin/bash

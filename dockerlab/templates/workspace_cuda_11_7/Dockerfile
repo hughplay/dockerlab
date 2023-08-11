@@ -67,6 +67,7 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
     lsb-release \
     sudo \
     openssh-client \
+    cuda-nsight-systems-11-7 \
     && rm -rf /var/lib/apt/lists/*
 
 

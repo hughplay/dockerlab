@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
     libgl1-mesa-glx \
     libglib2.0-0 \
     fontconfig \
+    cuda-nsight-systems-11-1 \
     && rm -rf /var/lib/apt/lists/*
 
 

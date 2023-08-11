@@ -20,7 +20,7 @@ jobs:
           - workspace_pytorch_1_13
           - workspace_pytorch_2_0
           - workspace_protein
-      max-parallel: 4
+      max-parallel: 3
     steps:
       - uses: actions/checkout@v3
 

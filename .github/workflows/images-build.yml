@@ -47,6 +47,8 @@ jobs:
 
       - name: Space Before Cache
         run: |
+          echo "Docker info:"
+          docker info
           echo "Free space:"
           df -h
 

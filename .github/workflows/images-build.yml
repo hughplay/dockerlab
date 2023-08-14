@@ -17,12 +17,21 @@ jobs:
           - workspace_cuda_11_3
           - workspace_cuda_11_7
           - runtime_node_lts
+          - workspace_protein
           - workspace_pytorch_1_13
           - workspace_pytorch_2_0
-          - workspace_protein
-      max-parallel: 2
+      max-parallel: 4
     steps:
-      - uses: actions/checkout@v3
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@v8
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: "true"
+          remove-android: "true"
+
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Cache Docker layers
         uses: actions/cache@v3

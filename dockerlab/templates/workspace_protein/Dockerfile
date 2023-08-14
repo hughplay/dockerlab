@@ -6,6 +6,7 @@ RUN wget -O cmake-3.22.5-linux-x86_64.tar.gz https://github.com/Kitware/CMake/re
     && tar zxvf cmake-3.22.5-linux-x86_64.tar.gz \
     && cd cmake-3.22.5-linux-x86_64 \
     && cp -r bin/ /usr/local \
+    && cp -r share/ /usr/local \
     && rm -rf /tmp/cmake-3.22.5-linux-x86_64 \
     && rm -rf /tmp/cmake-3.22.5-linux-x86_64.tar.gz
 

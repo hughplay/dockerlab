@@ -22,6 +22,16 @@ jobs:
           - workspace_pytorch_2_0
       max-parallel: 4
     steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 40960
+          swap-size-mb: 1024
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-codeql: "true"
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -48,6 +58,7 @@ jobs:
           echo "Free space:"
           df -h
 
+      # https://docs.docker.com/build/cache/backends/#cache-mode
       - name: Build and Push Docker Image
         id: docker_build
         uses: docker/build-push-action@v4

@@ -22,35 +22,8 @@ jobs:
           - workspace_pytorch_2_0
       max-parallel: 4
     steps:
-      # Clean unnecessary files to save disk space
-      - name: clean unncessary files to save space
-        run: |
-          docker rmi `docker images -q`
-          sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/sudo apt/sources.list.d
-          sudo apt -y autoremove --purge
-          sudo apt -y autoclean
-          sudo apt clean
-          rm --recursive --force "$AGENT_TOOLSDIRECTORY"
-          df -h
-
-      # Free up disk space on Ubuntu
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
-        with:
-          # This might remove tools that are actually needed, if set to "true" but frees about 6 GB
-          tool-cache: false
-          large-packages: true
-          swap-storage: true
-
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Space Before Cache
-        run: |
-          echo "Docker info:"
-          docker info
-          echo "Free space:"
-          df -h
 
       - name: Cache Docker layers
         uses: actions/cache@v3
@@ -85,7 +58,12 @@ jobs:
             deepbase/dockerlab:${{ matrix.template }}
 
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
       - name: Docker Hub Description
         id: dockerhub-description

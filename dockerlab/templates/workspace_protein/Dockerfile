@@ -5,7 +5,7 @@ FROM deepbase/dockerlab:workspace_cuda_11_1
 RUN wget -O cmake-3.22.5-linux-x86_64.tar.gz https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5-linux-x86_64.tar.gz \
     && tar zxvf cmake-3.22.5-linux-x86_64.tar.gz \
     && cd cmake-3.22.5-linux-x86_64 \
-    && cp -r bin doc man share /usr/local/ \
+    && cp -r bin/ /usr/local \
     && rm -rf /tmp/cmake-3.22.5-linux-x86_64 \
     && rm -rf /tmp/cmake-3.22.5-linux-x86_64.tar.gz
 

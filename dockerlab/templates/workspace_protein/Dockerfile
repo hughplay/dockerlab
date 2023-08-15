@@ -151,7 +151,7 @@ RUN cd /tmp \
 
 
 # Install alignment tools: Clustal-Omega, EMBOSS, ProbCons
-RUN conda install -c bioconda clustalo emboss probcons \
+RUN conda install -y -c bioconda clustalo emboss probcons \
     && conda clean -a -y
 
 RUN rm -rf /var/lib/apt/lists/*

@@ -1,15 +1,6 @@
 # syntax=docker/dockerfile:1.4
 FROM deepbase/dockerlab:workspace_cuda_11_1
 
-# Install CMake
-RUN wget -O cmake-3.22.5-linux-x86_64.tar.gz https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5-linux-x86_64.tar.gz \
-    && tar zxvf cmake-3.22.5-linux-x86_64.tar.gz \
-    && cd cmake-3.22.5-linux-x86_64 \
-    && cp -r bin/ /usr/local \
-    && cp -r share/ /usr/local \
-    && rm -rf /tmp/cmake-3.22.5-linux-x86_64 \
-    && rm -rf /tmp/cmake-3.22.5-linux-x86_64.tar.gz
-
 RUN apt-get update
 
 # Install vmtouch
@@ -151,7 +142,8 @@ RUN cd /tmp \
 
 
 # Install alignment tools: Clustal-Omega, EMBOSS, ProbCons
-RUN conda install -c bioconda clustalo emboss probcons \
+RUN conda update conda \
+    && conda install -y -c bioconda clustalo emboss probcons \
     && conda clean -a -y
 
 RUN rm -rf /var/lib/apt/lists/*

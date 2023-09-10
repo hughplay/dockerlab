@@ -33,6 +33,16 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
     && rm -rf /var/lib/apt/lists/*
 
 
+# Update CMake
+RUN wget -O cmake-3.22.5-linux-x86_64.tar.gz https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5-linux-x86_64.tar.gz \
+    && tar zxvf cmake-3.22.5-linux-x86_64.tar.gz \
+    && cd cmake-3.22.5-linux-x86_64 \
+    && cp -r bin/ /usr/local \
+    && cp -r share/ /usr/local \
+    && rm -rf /tmp/cmake-3.22.5-linux-x86_64 \
+    && rm -rf /tmp/cmake-3.22.5-linux-x86_64.tar.gz
+
+
 # Install Miniconda & use Python 3.8
 ARG python=3.8
 ENV PYTHON_VERSION=${python}

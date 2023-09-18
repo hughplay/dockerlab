@@ -145,6 +145,15 @@ Your setting (.env):
 python docker.py
 ```
 
+## 本地Build镜像
+
+``` sh
+docker build \
+    -f dockerlab/templates/workspace_protein/Dockerfile \
+    -t deepbase/dockerlab:workspace_protein \
+    .
+```
+
 ## 许可证
 
 Dockerlab使用[MIT许可证](LICENSE)。

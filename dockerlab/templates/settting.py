@@ -32,19 +32,19 @@ TEMPLATE_SETTING = {
         "prebuilt": "deepbase/dockerlab:runtime_node_lts",
     },
     "workspace_node_16": {
-        "post_templates": ["default"],
+        "post_templates": ["node", "default"],
         "assets": ["misc/"],
         "cuda": "",
         "prebuilt": "deepbase/dockerlab:workspace_node_16",
     },
     "workspace_node_18": {
-        "post_templates": ["default"],
+        "post_templates": ["node", "default"],
         "assets": ["misc/"],
         "cuda": "",
         "prebuilt": "deepbase/dockerlab:workspace_node_18",
     },
     "workspace_node_20": {
-        "post_templates": ["default"],
+        "post_templates": ["node", "default"],
         "assets": ["misc/"],
         "cuda": "",
         "prebuilt": "deepbase/dockerlab:workspace_node_20",

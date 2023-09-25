@@ -18,6 +18,9 @@ jobs:
           - workspace_cuda_11_3
           - workspace_cuda_11_7
           - runtime_node_lts
+          - workspace_node_16
+          - workspace_node_18
+          - workspace_node_20
           - workspace_pytorch_1_13
           - workspace_pytorch_2_0
           - workspace_protein

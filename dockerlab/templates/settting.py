@@ -31,6 +31,24 @@ TEMPLATE_SETTING = {
         "cuda": "",
         "prebuilt": "deepbase/dockerlab:runtime_node_lts",
     },
+    "workspace_node_16": {
+        "post_templates": ["default"],
+        "assets": ["misc/"],
+        "cuda": "",
+        "prebuilt": "deepbase/dockerlab:workspace_node_16",
+    },
+    "workspace_node_18": {
+        "post_templates": ["default"],
+        "assets": ["misc/"],
+        "cuda": "",
+        "prebuilt": "deepbase/dockerlab:workspace_node_18",
+    },
+    "workspace_node_20": {
+        "post_templates": ["default"],
+        "assets": ["misc/"],
+        "cuda": "",
+        "prebuilt": "deepbase/dockerlab:workspace_node_20",
+    },
     "workspace_pytorch_1_13": {
         "post_templates": ["python", "default"],
         "assets": ["misc/", "requirements.txt"],

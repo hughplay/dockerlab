@@ -25,6 +25,12 @@ TEMPLATE_SETTING = {
         "cuda": "11.7",
         "prebuilt": "deepbase/dockerlab:workspace_cuda_11_7",
     },
+    "workspace_cuda_11_8": {
+        "post_templates": ["python", "default"],
+        "assets": ["misc/", "requirements.txt"],
+        "cuda": "11.8",
+        "prebuilt": "deepbase/dockerlab:workspace_cuda_11_8",
+    },
     "runtime_node_lts": {
         "post_templates": ["node", "default"],
         "assets": ["misc/"],
@@ -60,6 +66,12 @@ TEMPLATE_SETTING = {
         "assets": ["misc/", "requirements.txt"],
         "cuda": "11.7",
         "prebuilt": "deepbase/dockerlab:workspace_pytorch_2_0",
+    },
+    "workspace_pytorch_2_1": {
+        "post_templates": ["python", "default"],
+        "assets": ["misc/", "requirements.txt"],
+        "cuda": "11.8",
+        "prebuilt": "deepbase/dockerlab:workspace_pytorch_2_1",
     },
     "workspace_protein": {
         "post_templates": ["python", "default"],

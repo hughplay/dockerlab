@@ -10,8 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build and publish to pypi
-        uses: JRubics/poetry-publish@v1.16
+        uses: JRubics/poetry-publish@v1.17
         with:
-          python_version: "3.8"
+          python_version: "3.9"
           pypi_token: ${{ secrets.PYPI_TOKEN }}
           plugins: "poetry-dynamic-versioning-plugin"

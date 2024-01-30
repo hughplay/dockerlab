@@ -76,6 +76,7 @@ def assemble_template(
         temp_text += "\n" * 3 + post_temp_text
 
     temp_text = (
+        "# syntax=docker/dockerfile:1.4"
         f"# dockerlab template: {name}"
         + (" (full)" if full else "")
         + "\n# https://github.com/hughplay/dockerlab"

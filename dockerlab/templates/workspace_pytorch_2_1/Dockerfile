@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM deepbase/dockerlab:workspace_cuda_11_8
+FROM deepbase/dockerlab:workspace_cuda_12_1
 
 
 # Install Pytorch 2.1

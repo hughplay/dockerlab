@@ -79,6 +79,12 @@ TEMPLATE_SETTING = {
         "cuda": "12.1",
         "prebuilt": "deepbase/dockerlab:workspace_pytorch_2_1",
     },
+    "workspace_pytorch_2_2": {
+        "post_templates": ["python", "default"],
+        "assets": ["misc/", "requirements.txt"],
+        "cuda": "12.1",
+        "prebuilt": "deepbase/dockerlab:workspace_pytorch_2_2",
+    },
     "workspace_protein": {
         "post_templates": ["python", "default"],
         "assets": ["misc/", "requirements.txt"],

@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
 
 # Set default RUN shell to /bin/bash
@@ -34,8 +34,18 @@ RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-
     && rm -rf /var/lib/apt/lists/*
 
 
-# Install Miniconda & use Python 3.10
-ARG python=3.10
+# Update CMake
+RUN wget -O cmake-3.22.5-linux-x86_64.tar.gz https://github.com/Kitware/CMake/releases/download/v3.22.5/cmake-3.22.5-linux-x86_64.tar.gz \
+    && tar zxvf cmake-3.22.5-linux-x86_64.tar.gz \
+    && cd cmake-3.22.5-linux-x86_64 \
+    && cp -r bin/ /usr/local \
+    && cp -r share/ /usr/local \
+    && rm -rf /tmp/cmake-3.22.5-linux-x86_64 \
+    && rm -rf /tmp/cmake-3.22.5-linux-x86_64.tar.gz
+
+
+# Install Miniconda & use Python 3.8
+ARG python=3.8
 ENV PYTHON_VERSION=${python}
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/install-conda.sh \
     && chmod +x /tmp/install-conda.sh \

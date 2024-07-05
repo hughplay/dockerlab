@@ -19,6 +19,7 @@ RUN git clone https://github.com/soedinglab/ffindex_soedinglab.git /tmp/ffindex 
     && rm -rf /tmp/ffindex
 
 # Install CCMpred
+ENV CUDACXX=/usr/local/cuda/bin/nvcc
 RUN git clone --recursive https://github.com/soedinglab/CCMpred.git /tmp/CCMpred \
     && mkdir /tmp/CCMpred/build \
     && cd /tmp/CCMpred/build \

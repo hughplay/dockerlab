@@ -79,6 +79,7 @@ dockerlab init .
 │   └── misc/
 ├── docker-compose.yml
 ├── docker.py
+├── Makefile
 └── .gitignore
 ```
 
@@ -90,6 +91,7 @@ dockerlab init .
 - `docker/Dockerfile`: 用于构建docker镜像的dockerfile。
 - `docker-compose.yml`: 用于构建docker容器的docker-compose文件。
 - `docker.py`: 用于构建和启动容器的python脚本。
+- `Makefile`: 基于make的便捷命令定义。
 
 
 dockerlab准备了几个模板和预构建的docker镜像。可以通过运行以下命令将默认的`docker/Dockerfile`替换为需要的模板:
@@ -109,7 +111,7 @@ dockerlab use <template_name> --full
 **4. 构建和启动容器**
 
 ```bash
-python docker.py startd
+make init
 ```
 
 当你第一次执行上述命令时，它将要求你输入与容器相关的信息，并将它们存储在`.env`中。提示和输出示例如下：
@@ -142,7 +144,7 @@ Your setting (.env):
 
 
 ```bash
-python docker.py
+make in
 ```
 
 ## 本地Build镜像

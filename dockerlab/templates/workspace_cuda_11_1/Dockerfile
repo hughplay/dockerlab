@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --allow-downgrades --allow-change-held-packages --no-install-recommends \
     build-essential \
     cmake \
-    g++-7 \
+    g++-12 \
     git \
     curl \
     wget \

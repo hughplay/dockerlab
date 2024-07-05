@@ -8,6 +8,7 @@ from .templates.settting import TEMPLATE_SETTING
 DEFAULT_ROOT_FILES = [
     "docker-compose.yml",
     "docker.py",
+    "Makefile",
     ".gitignore",
 ]
 ASSETS_DIR = Path(__file__).parent.resolve() / "assets"

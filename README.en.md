@@ -76,6 +76,7 @@ This will setup a few files and directories, the structure is as follows:
 │   └── misc/
 ├── docker-compose.yml
 ├── docker.py
+├── Makefile
 └── .gitignore
 ```
 
@@ -87,6 +88,7 @@ In general, you only need to modify `docker/Dockerfile` to customize your own wo
 - `docker/Dockerfile`: The dockerfile for building the docker image.
 - `docker-compose.yml`: The docker-compose file for building the docker container.
 - `docker.py`: The python script for building and starting the container.
+- `Makefile`: Convenient commands based on make.
 
 
 We have prepared several templates and pre-built docker images for you. You can replace the default `docker/Dockerfile` with the template you like by running the following command:
@@ -106,7 +108,7 @@ dockerlab use <template_name> --full
 **4. Build and start the container**
 
 ```bash
-python docker.py startd
+make init
 ```
 
 When you first execute the above command, it will ask you to enter information related to the container and store them in `.env`. The example of prompt and the output are as follows:
@@ -138,7 +140,7 @@ Your setting (.env):
 **5. Get in the container and start your journey.**
 
 ```bash
-python docker.py
+make in
 ```
 
 ## License

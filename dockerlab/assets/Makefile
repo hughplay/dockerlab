@@ -11,5 +11,9 @@ in:
 	python docker.py
 
 # run on host
+root:
+	python docker.py --root
+
+# run on host
 copy_git:
 	cp ~/.gitconfig $(CONTAINER_HOME)/ && cp -r ~/.ssh $(CONTAINER_HOME)/

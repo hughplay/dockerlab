@@ -73,9 +73,9 @@ def new(name, template=None, full=False, post=None):
         "\n  # Use template."
         "\n  > dockerlab use <template>"
         "\n\n# Build and start the container."
-        "\n> python docker.py startd"
+        "\n> make init"
         "\n\n# Get into the container."
-        "\n> python docker.py"
+        "\n> make in"
     )
 
 

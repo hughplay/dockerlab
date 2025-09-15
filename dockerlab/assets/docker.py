@@ -41,8 +41,8 @@ class Env:
                     lines.append(line)
                     line = line.strip()
                     if line and not line.startswith("#"):
-                        key, val = line.split("=")
-                    variables[key] = {"line": i, "key": key, "val": val}
+                        key, val = line.split("=", 1)
+                        variables[key] = {"line": i, "key": key, "val": val}
         return lines, variables
 
     def __repr__(self):
